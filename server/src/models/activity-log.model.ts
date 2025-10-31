@@ -10,7 +10,7 @@ export interface IActivityLog extends Document {
   date: string;
   time: string;
   timestamp: Date;
-  actionType: 'typing' | 'paste';
+  actionType: 'typing' | 'paste' | 'delete' | 'cut';
   typedLines: number;
   pastedLines: number;
   totalLines: number;
@@ -57,7 +57,7 @@ const ActivityLogSchema: Schema = new Schema(
     },
     actionType: {
       type: String,
-      enum: ['typing', 'paste'],
+      enum: ['typing', 'paste', 'delete', 'cut'],
       required: true,
     },
     typedLines: {

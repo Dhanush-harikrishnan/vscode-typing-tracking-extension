@@ -29,14 +29,18 @@ export function getEditorVersion(): string {
 
 /**
  * Count lines in a text string
+ * Returns the number of NEW LINES being added (only counts newline characters)
+ * NOTE: This should ONLY count when user presses Enter, not every character typed
  */
 export function countLines(text: string): number {
-  if (!text) {
+  if (!text || text.length === 0) {
     return 0;
   }
-  // Count newlines + 1 for the content itself
-  const lines = text.split(/\r?\n/).length;
-  return lines;
+  
+  // Count ONLY actual newline characters
+  // A "line" is added only when user presses Enter (creates \n)
+  const newlineMatches = text.match(/\r?\n/g);
+  return newlineMatches ? newlineMatches.length : 0;
 }
 
 /**

@@ -12,7 +12,7 @@ export interface ActivityLog {
   date: string;
   time: string;
   timestamp: Date;
-  actionType: 'typing' | 'paste';
+  actionType: 'typing' | 'paste' | 'delete' | 'cut';
   typedLines: number;
   pastedLines: number;
   totalLines: number;
@@ -51,6 +51,9 @@ export interface FileSession {
   filePath: string;
   typedLines: number;
   pastedLines: number;
+  deletedLines: number;
+  contentSnippets: string[]; // Track snippets of changes
+  initialLineCount: number; // Line count when session started
   sessionStart: Date;
   lastActivity: Date;
   pendingChanges: boolean;
@@ -63,5 +66,6 @@ export interface ChangeEvent {
   text: string;
   rangeLength: number;
   isPaste: boolean;
+  isDelete: boolean;
   lineCount: number;
 }

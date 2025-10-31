@@ -35,11 +35,15 @@ class Server {
     this.app.use(helmet());
 
     // CORS configuration
+    const corsOrigin = process.env.CORS_ORIGIN || '*';
+    const allowedOrigins = corsOrigin === '*' ? '*' : corsOrigin.split(',').map(origin => origin.trim());
+    
     this.app.use(
       cors({
-        origin: process.env.CORS_ORIGIN || '*',
-        methods: ['GET', 'POST', 'PUT', 'DELETE'],
+        origin: allowedOrigins,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
         credentials: true,
+        allowedHeaders: ['Content-Type', 'Authorization'],
       })
     );
 

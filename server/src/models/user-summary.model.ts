@@ -10,6 +10,7 @@ export interface IUserActivitySummary extends Document {
   totalPastedLines: number;
   typingToPastingRatio: number;
   totalFilesEdited: number;
+  files: string[]; // Array of unique file paths edited
   createdAt: Date;
   updatedAt: Date;
 }
@@ -53,6 +54,11 @@ const UserActivitySummarySchema: Schema = new Schema(
       required: true,
       min: 0,
       default: 0,
+    },
+    files: {
+      type: [String],
+      default: [],
+      index: false,
     },
   },
   {
